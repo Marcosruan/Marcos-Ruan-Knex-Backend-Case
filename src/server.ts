@@ -1,8 +1,11 @@
 import fastify from 'fastify';
+import { loginRoute } from './routes/login-route.js';
 
 const PORT = 8080;
 
-export const app = fastify({ logger: true });
+const app = fastify({ logger: true });
+
+app.register(loginRoute);
 
 app.listen({port:PORT, host:'0.0.0.0'}, (error: Error | null, adress: string) => {
     if (error) {

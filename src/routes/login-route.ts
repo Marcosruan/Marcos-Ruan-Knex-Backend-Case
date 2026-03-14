@@ -1,0 +1,12 @@
+import type { FastifyInstance } from "fastify";
+import { LoginController } from "../controllers/login-controller.js";
+import { LoginService } from "../services/login-service.js";
+import { LoginRepository } from "../repositories/login-repository.js";
+import { db } from "../db/index.js";
+
+export async function loginRoute(app: FastifyInstance) {
+  const repository = new LoginRepository(db);
+  const service = new LoginService(repository);
+  const controller = new LoginController(service);
+  app.post("/users", (req, res) => controller.createLogin(req, res));
+}
