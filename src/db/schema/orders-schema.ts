@@ -1,7 +1,6 @@
 import { pgTable, pgEnum } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm"
-import { users } from './users-schema.js'
-import { products } from './products-schema.js'
+import { products } from './products-schema'
+import { users } from './users-schema'
 
 export const orderStatus = pgEnum("order_status", ["PENDING", "PAID", "CANCELLED", "REFUNDED"]);
 
@@ -23,19 +22,3 @@ export const order_items = pgTable("order_items", (t) => ({
 	quantity: t.integer("quantity").notNull(),
   })
 );
-
-export const orderRelations = relations(orders, ({ many }) => ({
-  items: many(order_items),
-}));
-
-export const orderItemsRelations = relations(order_items, ({ one }) => ({
-  orders: one(orders, {
-    fields: [order_items.order_id],
-    references: [orders.id],
-  }),
-
-  product: one(products, {
-    fields: [order_items.product_id],
-    references: [products.id],
-  }),
-}));
