@@ -9,10 +9,11 @@ export const user = pgTable("user", (t) => ({
   email: t.varchar("email", { length: 255 }).notNull().unique(),
   password: t.varchar("password", { length: 255 }).notNull(),
   role: userRole("userRole").notNull().default("CUSTOMER"),
+  company_cnpj: t.varchar("company_cnpj", { length: 14 }).references(() => company.cnpj),
 }));
 
 export const company = pgTable("company", (t) => ({
-  cnpj: t.varchar("cnpj", { length: 18 }).primaryKey(),
+  cnpj: t.varchar("cnpj", { length: 14 }).primaryKey(),
   name: t.varchar("name", { length: 255 }).notNull(),
 }));
 
@@ -34,8 +35,8 @@ export const order = pgTable("order", (t) => ({
 
 export const order_item = pgTable("order_item", (t) => ({
 	id: t.uuid("id").primaryKey().notNull().defaultRandom(),
-    order_id: t.uuid("order_id").notNull().references(() => order.id),
-    product_id: t.uuid("product_id").notNull().references(() => product.id),
+  order_id: t.uuid("order_id").notNull().references(() => order.id),
+  product_id: t.uuid("product_id").notNull().references(() => product.id),
 	price: t.numeric("price", { precision: 10, scale: 2 }).notNull(),
 	quantity: t.integer("quantity").notNull(),
   })
