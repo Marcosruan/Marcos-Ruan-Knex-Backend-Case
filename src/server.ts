@@ -1,11 +1,19 @@
 import fastify from 'fastify';
+import 'dotenv/config'
 import { loginRoute } from './routes/login-route.js';
+import { signinRoute } from './routes/register-route.js';
 
-const PORT = 8080;
+
+if (!process.env.PORT) {
+    throw new Error("PORT não definida")
+}
+
+const PORT = Number(process.env.PORT)
 
 const app = fastify({ logger: true });
 
 app.register(loginRoute);
+app.register(signinRoute);
 
 app.listen({port:PORT, host:'0.0.0.0'}, (error: Error | null, adress: string) => {
     if (error) {
