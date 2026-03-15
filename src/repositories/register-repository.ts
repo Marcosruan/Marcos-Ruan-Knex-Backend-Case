@@ -9,4 +9,11 @@ export class SigninRepository implements ISigninRepository {
 		const user = await this.orm.insert(users).values(data).returning()
 		return user;
 	}
+
+	async userExists(email: string) {
+		const user = await this.orm.query.users.findFirst({
+    		where: (users, { eq }) => eq(users.email, email)
+		})
+		return user;
+	}
 }
