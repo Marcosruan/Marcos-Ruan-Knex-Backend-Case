@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
-import { LoginController } from "../controllers/login-controller.js";
-import { LoginService } from "../services/login-service.js";
-import { LoginRepository } from "../repositories/login-repository.js";
+import { LoginController } from "../modules/login/login-controller.js";
+import { LoginService } from "../modules/login/login-service.js";
+import { LoginRepository } from "../modules/login/login-repository.js";
 import { db } from "../db/index.js";
 
 export async function loginRoute(app: FastifyInstance) {

@@ -10,11 +10,11 @@ export const bodySchema = z.object({
 
 export type CreateUserDTO = z.infer<typeof bodySchema>
 
-export interface ISigninRepository{
+export interface IRegisterRepository{
     createUser(data: CreateUserDTO): Promise<any>
     userExists(email: string): Promise<any>
 }
 
-export interface ISigninService{
+export interface IRegisterService{
     createUser(data: CreateUserDTO): Promise<any>
 }
