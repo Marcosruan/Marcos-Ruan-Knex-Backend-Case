@@ -9,5 +9,5 @@ export async function loginRoute(app: FastifyInstance) {
   const service = new LoginService(repository);
   const controller = new LoginController(service);
   
-  app.post("/users", (req, res) => controller.handler(req, res));
+  app.post("/users", (req, res) => controller.handle(req, res));
 }

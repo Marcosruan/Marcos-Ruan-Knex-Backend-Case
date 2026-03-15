@@ -4,7 +4,7 @@ import { bodySchema } from "./login-interfaces.js";
 export class LoginController {
   constructor(private service: LoginService) {}
 
-  async handler(request: FastifyRequest, reply: FastifyReply) {
+  async handle(request: FastifyRequest, reply: FastifyReply) {
 
     const data = bodySchema.parse(request.body);
 

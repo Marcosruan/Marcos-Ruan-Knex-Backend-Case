@@ -1,17 +1,17 @@
-import {z} from 'zod'
-import type { UserResponse } from '../../@types/user-response'
+import { z } from "zod";
+import type { UserResponse } from "../../@types/responses";
 
 export const bodySchema = z.object({
   email: z.string().email(),
   password: z.string(),
-})
+});
 
-export type LoginDTO = z.infer<typeof bodySchema>
+export type LoginDTO = z.infer<typeof bodySchema>;
 
-export interface ILoginRepository{
-    findByEmail(email: string): Promise<UserResponse | undefined>
+export interface ILoginRepository {
+  findByEmail(email: string): Promise<UserResponse | undefined>;
 }
 
-export interface ILoginService{
-    execute(data: LoginDTO): Promise<UserResponse>
+export interface ILoginService {
+  execute(data: LoginDTO): Promise<UserResponse>;
 }

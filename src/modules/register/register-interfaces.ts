@@ -1,26 +1,26 @@
-import {z} from 'zod'
-import type { UserResponse } from '../../@types/user-response'
+import { z } from "zod";
+import type { UserResponse } from "../../@types/responses";
 
 export const bodySchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  role: z.enum(["CUSTOMER", "SALESPERSON"]).optional(),
-  company_cnpj: z.string().nullable().optional()
-})
+  role: z.enum(["CUSTOMER", "SALESPERSON", "ADMIN"]).optional(),
+  company_cnpj: z.string().nullable().optional(),
+});
 
-export type CreateUserDTO = z.infer<typeof bodySchema>
+export type CreateUserDTO = z.infer<typeof bodySchema>;
 export interface StrictUserResponse {
-  id: string
-  name: string
-  email: string
+  id: string;
+  name: string;
+  email: string;
 }
 
-export interface IRegisterRepository{
-    createUser(data: CreateUserDTO): Promise<UserResponse>
-    userExists(email: string): Promise<UserResponse | undefined>
+export interface IRegisterRepository {
+  createUser(data: CreateUserDTO): Promise<UserResponse>;
+  userExists(email: string): Promise<UserResponse | undefined>;
 }
 
-export interface IRegisterService{
-    execute(data: CreateUserDTO): Promise<StrictUserResponse>
+export interface IRegisterService {
+  execute(data: CreateUserDTO): Promise<StrictUserResponse>;
 }

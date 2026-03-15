@@ -10,7 +10,7 @@ export class LoginService implements ILoginService{
     	const user = await this.repository.findByEmail(data.email);
 
     	if (!user) {
-    	  throw new AppError("Resource not found. The user may not exist or credentials are wrong/missing.", 401);
+    	  throw new AppError("Resource not found: The user may not exist or credentials are wrong/missing.", 401);
    		}
 
     	const passwordMatch = await bcrypt.compare(data.password, user.password);
