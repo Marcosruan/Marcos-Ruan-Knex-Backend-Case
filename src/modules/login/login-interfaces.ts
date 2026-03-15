@@ -1,4 +1,5 @@
 import {z} from 'zod'
+import type { UserResponse } from '../../@types/user-response'
 
 export const bodySchema = z.object({
   email: z.string().email(),
@@ -8,9 +9,9 @@ export const bodySchema = z.object({
 export type LoginDTO = z.infer<typeof bodySchema>
 
 export interface ILoginRepository{
-    findByEmail(email: string): Promise<any>
+    findByEmail(email: string): Promise<UserResponse | undefined>
 }
 
 export interface ILoginService{
-    execute(data: LoginDTO): Promise<any>
+    execute(data: LoginDTO): Promise<UserResponse>
 }

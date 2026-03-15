@@ -20,9 +20,8 @@ export class LoginController {
 			sub: user.id,
 			expiresIn: "2h"
 			}
-		}
-		)
+		})
 
-		return { token }
+	return { token }
   }
 }

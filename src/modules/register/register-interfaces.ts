@@ -1,6 +1,5 @@
 import {z} from 'zod'
-import type { InferSelectModel } from 'drizzle-orm'
-import { users } from '../../db/schema'
+import type { UserResponse } from '../../@types/user-response'
 
 export const bodySchema = z.object({
   name: z.string(),
@@ -11,10 +10,6 @@ export const bodySchema = z.object({
 })
 
 export type CreateUserDTO = z.infer<typeof bodySchema>
-
-export type UserResponse = InferSelectModel<typeof users>
-
-
 export interface StrictUserResponse {
   id: string
   name: string
