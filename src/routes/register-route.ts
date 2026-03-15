@@ -8,5 +8,6 @@ export async function registerRoute(app: FastifyInstance) {
   const repository = new RegisterRepository(db);
   const service = new RegisterService(repository);
   const controller = new RegisterController(service);
-  app.post("/register", (req, res) => controller.createUser(req, res));
+  
+  app.post("/register", (req, res) => controller.handler(req, res));
 }

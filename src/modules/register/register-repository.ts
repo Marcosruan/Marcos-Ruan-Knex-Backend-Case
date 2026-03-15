@@ -6,14 +6,12 @@ export class RegisterRepository implements IRegisterRepository {
   constructor(private orm: typeof db) {}
 
   async createUser(data: CreateUserDTO) {
-    const user = await this.orm.insert(users).values(data).returning();
-    return user;
+    const [user] = await this.orm.insert(users).values(data).returning();
+    return user!;
   }
 
   async userExists(email: string) {
-    const user = await this.orm.query.users.findFirst({
-      where: (users, { eq }) => eq(users.email, email),
-    });
-    return user;
+    return await this.orm.query.users.findFirst({
+      where: (users, { eq }) => eq(users.email, email)});
   }
 }

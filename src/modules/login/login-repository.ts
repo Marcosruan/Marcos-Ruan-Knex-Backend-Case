@@ -1,9 +1,11 @@
 import { db } from "../../db/index.js";
+import { users } from "../../db/schema/users-schema.js";
 
 export class LoginRepository {
   constructor(private orm: typeof db) {}
 
-  async createLogin() {
-    return { ok: true };
+  async findByEmail(email: string) {
+    return await this.orm.query.users.findFirst({
+      where: (users, { eq }) => eq(users.email, email)});
   }
 }

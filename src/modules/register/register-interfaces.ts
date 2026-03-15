@@ -1,4 +1,6 @@
 import {z} from 'zod'
+import type { InferSelectModel } from 'drizzle-orm'
+import { users } from '../../db/schema'
 
 export const bodySchema = z.object({
   name: z.string(),
@@ -10,11 +12,20 @@ export const bodySchema = z.object({
 
 export type CreateUserDTO = z.infer<typeof bodySchema>
 
+export type UserResponse = InferSelectModel<typeof users>
+
+
+export interface StrictUserResponse {
+  id: string
+  name: string
+  email: string
+}
+
 export interface IRegisterRepository{
-    createUser(data: CreateUserDTO): Promise<any>
-    userExists(email: string): Promise<any>
+    createUser(data: CreateUserDTO): Promise<UserResponse>
+    userExists(email: string): Promise<UserResponse | undefined>
 }
 
 export interface IRegisterService{
-    createUser(data: CreateUserDTO): Promise<any>
+    execute(data: CreateUserDTO): Promise<StrictUserResponse>
 }
