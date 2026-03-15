@@ -13,7 +13,7 @@ if (!process.env.PORT) {
 
 const PORT = Number(process.env.PORT);
 
-const app = fastify({ logger: true });
+export const app = fastify({ logger: true });
 
 app.register(fastifyJwt, {secret: process.env.JWT_SECRET!});
 app.register(loginRoute);
