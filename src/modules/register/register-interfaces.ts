@@ -6,7 +6,7 @@ export const bodySchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  role: z.enum(["CUSTOMER", "SELLER"]).optional(),
+  role: z.enum(["CUSTOMER", "SALESPERSON"]).optional(),
   company_cnpj: z.string().nullable().optional()
 })
 

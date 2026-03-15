@@ -1,7 +1,7 @@
 import { pgTable, pgEnum } from "drizzle-orm/pg-core";
 import { companies } from "./companies-schema";
 
-export const userRole = pgEnum("user_roles", ["CUSTOMER", "SELLER"]);
+export const userRole = pgEnum("user_roles", ["CUSTOMER", "SALESPERSON"]);
 
 export const users = pgTable("users", (t) => ({
   id: t.uuid("id").primaryKey().defaultRandom(),

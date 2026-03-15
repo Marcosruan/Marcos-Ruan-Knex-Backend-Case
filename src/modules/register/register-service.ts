@@ -13,7 +13,7 @@ export class RegisterService implements IRegisterService {
     		throw new AppError("Resource colision. The user may already exist", 409);
     	}
 
-    	if (data.role === "SELLER" && !data.company_cnpj){
+    	if (data.role === "SALESPERSON" && !data.company_cnpj){
 			throw new AppError("Salespeople must belong to a company. Company might be wrong/missing.", 400);
     	}
 
