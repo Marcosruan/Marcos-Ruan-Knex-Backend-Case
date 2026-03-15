@@ -1,5 +1,6 @@
 import "dotenv/config";
 import fastify from "fastify";
+import fastifyJwt from '@fastify/jwt';
 import { loginRoute } from "./routes/login-route";
 import { registerRoute } from "./routes/register-route.js";
 import { ZodError } from "zod";
@@ -13,6 +14,7 @@ const PORT = Number(process.env.PORT);
 
 const app = fastify({ logger: true });
 
+app.register(fastifyJwt, {secret: process.env.JWT_SECRET!});
 app.register(loginRoute);
 app.register(registerRoute);
 
@@ -20,7 +22,7 @@ app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {
     return reply
       .status(400)
-      .send({ message: "Validation error", issues: error.format() });
+      .send({ message: "Validation error. Body request might have wrong/missing data.", issues: error.format() });
   }
 
   if (error instanceof AppError) {
