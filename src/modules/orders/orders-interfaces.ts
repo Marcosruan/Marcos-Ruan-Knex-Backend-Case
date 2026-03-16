@@ -2,7 +2,6 @@ import { z } from "zod";
 import type { OrdersResponse } from "../../@types/responses";
 
 export const bodySchemaAdd = z.object({
-    userId: z.string().uuid(),
     items: z.array(
       z.object({
         productId: z.string().uuid(),

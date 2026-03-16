@@ -17,12 +17,4 @@ export async function ordersRoute(app: FastifyInstance) {
   app.post("/orders", { onRequest: [verifyJWT] }, (req, res) =>
     controller.add(req, res),
   );
-
-  //   app.patch("/orders", { onRequest: [verifyJWT] }, (req, res) =>
-  //   controller.update(req, res),
-  // );
-
-  //   app.delete("/orders", { onRequest: [verifyJWT] }, (req, res) =>
-  //   controller.delete(req, res),
-  // );
 }

@@ -6,9 +6,11 @@ export class OrdersController {
     constructor(private service: OrdersService) {}
 
     async add(request: FastifyRequest, reply: FastifyReply){
-        const { userId, items } = bodySchemaAdd.parse(request.body);
+        const  { items } = bodySchemaAdd.parse(request.body);
+
+        const userId = request.user.sub;
     
-        const { order } = await this.service.addOrder({userId,items});
+        const { order } = await this.service.addOrder({userId, items});
     
         return reply.status(201).send({ orderId: order.id, status: order.status });
 
@@ -18,25 +20,5 @@ export class OrdersController {
     //     const products = await this.service.listAll();
     
     //     return reply.code(200).send(products);
-    // }
-    
-    // async update(request: FastifyRequest, reply: FastifyReply) {
-    //     const data: UpdateProductRequestDTO = bodySchemaUpdate.parse(request.body);
-    
-    //     const user: AuthUser = {role: request.user.role, company_cnpj: request.user.company_cnpj};
-    
-    //     const productUpdated = await this.service.update(data, user);
-    
-    //     return reply.code(200).send(productUpdated);
-    // }
-    
-    // async delete(request: FastifyRequest, reply: FastifyReply) {
-    //     const {id} = bodySchemaDelete.parse(request.body);
-    
-    //     const user: AuthUser = {role: request.user.role, company_cnpj: request.user.company_cnpj};
-    
-    //     const productUpdated = await this.service.delete(id, user);
-    
-    //     return reply.code(200).send(productUpdated);
     // }
 }
