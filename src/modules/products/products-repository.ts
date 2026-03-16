@@ -15,4 +15,9 @@ export class ProductsRepository implements IProductRepository {
     	return await this.orm.query.products.findFirst({
     	where: (products, { eq, and }) => and(eq(products.name, data.name), eq(products.company_cnpj, data.company_cnpj))});
 	}
+
+	async getAllProducts() {
+		const [products] = await this.orm.query.products.findMany();
+  		return products;
+	}
 }

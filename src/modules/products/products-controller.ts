@@ -15,4 +15,10 @@ export class ProductsController {
 
     return reply.code(201).send(product);
   }
+
+  async list(reply: FastifyReply){
+    const products = await this.service.listAll();
+
+    return reply.code(200).send(products);
+  }
 }

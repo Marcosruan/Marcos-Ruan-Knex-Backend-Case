@@ -17,6 +17,7 @@ export type ProductDTO = z.infer<typeof bodySchema>;
 export interface IProductRepository {
   productTypeExists(data: ProductDTO): Promise<ProductResponse | undefined>;
   addProduct(data: ProductDTO): Promise<ProductResponse>;
+  getAllProducts(): Promise<ProductResponse | undefined>
 }
 
 export interface IProductService {

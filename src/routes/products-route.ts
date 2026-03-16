@@ -10,6 +10,10 @@ export async function productsRoute(app: FastifyInstance) {
   const service = new ProductsService(repository);
   const controller = new ProductsController(service);
 
+  app.get("/products", { onRequest: [verifyJWT] }, (req, res) =>
+    controller.list(res),
+  );
+
   app.post("/products", { onRequest: [verifyJWT] }, (req, res) =>
     controller.handle(req, res),
   );

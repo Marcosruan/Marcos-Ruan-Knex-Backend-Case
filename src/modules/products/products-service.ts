@@ -21,4 +21,14 @@ export class ProductsService implements IProductService {
 
         return product;
     }
+
+    async listAll() {
+        const products = await this.repository.getAllProducts();
+
+        if (!products){
+            throw new AppError("No content: no products registered", 204);
+        }
+
+        return products; 
+    }
 }
