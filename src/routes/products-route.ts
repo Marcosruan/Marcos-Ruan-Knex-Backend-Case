@@ -14,6 +14,10 @@ export async function productsRoute(app: FastifyInstance) {
     controller.list(res),
   );
 
+  app.get("/companies/:cnpj/products", async (req, res) =>
+    controller.listByCompany(req, res)
+  );
+
   app.post("/products", { onRequest: [verifyJWT] }, (req, res) =>
     controller.add(req, res),
   );

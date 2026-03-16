@@ -22,6 +22,15 @@ export class ProductsRepository implements IProductRepository {
   		return await this.orm.query.products.findMany();
 	}
 
+	async getProductsByCompany(cnpj: string) {
+		const productsList = await this.orm
+		.select()
+		.from(products)
+		.where(eq(products.company_cnpj, cnpj));
+
+		return productsList;
+	}
+
 	async findById(id: string){
     	return await this.orm.query.products.findFirst({
     	where: (products, { eq }) => eq(products.id, id)});

@@ -22,6 +22,14 @@ export class ProductsController {
     return reply.code(200).send(products);
   }
 
+  async listByCompany(request: FastifyRequest, reply: FastifyReply) {
+    const { cnpj } = request.params as { cnpj: string };
+
+    const products = await this.service.listProductsByCompany(cnpj);
+
+    return reply.status(200).send(products);
+  }
+
   async update(request: FastifyRequest, reply: FastifyReply) {
     const data: UpdateProductRequestDTO = bodySchemaUpdate.parse(request.body);
 

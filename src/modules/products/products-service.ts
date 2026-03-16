@@ -32,6 +32,12 @@ export class ProductsService implements IProductService {
         return products; 
     }
 
+    async listProductsByCompany(cnpj: string) {
+        const products = await this.repository.getProductsByCompany(cnpj);
+    
+        return products;
+    }
+
     async update(updateRequest: UpdateProductRequestDTO, user: AuthUser) {
         const product = await this.repository.findById(updateRequest.id);
 
