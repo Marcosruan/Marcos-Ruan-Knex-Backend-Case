@@ -7,6 +7,7 @@ import { ZodError } from "zod";
 import { AppError } from "./utils/app-error.js";
 import { companyRoute } from "./routes/companies-route";
 import { productsRoute } from "./routes/products-route";
+import { ordersRoute } from "./routes/orders-route";
 
 if (!process.env.PORT) {
   throw new Error("PORT não definido");
@@ -21,6 +22,7 @@ app.register(loginRoute);
 app.register(registerRoute);
 app.register(companyRoute);
 app.register(productsRoute);
+app.register(ordersRoute);
 
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {
