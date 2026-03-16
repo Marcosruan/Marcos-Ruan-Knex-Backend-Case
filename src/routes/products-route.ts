@@ -15,6 +15,14 @@ export async function productsRoute(app: FastifyInstance) {
   );
 
   app.post("/products", { onRequest: [verifyJWT] }, (req, res) =>
-    controller.handle(req, res),
+    controller.add(req, res),
+  );
+
+    app.patch("/products", { onRequest: [verifyJWT] }, (req, res) =>
+    controller.update(req, res),
+  );
+
+    app.delete("/products", { onRequest: [verifyJWT] }, (req, res) =>
+    controller.delete(req, res),
   );
 }

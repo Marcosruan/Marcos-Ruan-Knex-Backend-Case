@@ -1,13 +1,13 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import type { AuthUser, ProductDTO } from "./products-interfaces";
-import { bodySchema } from "./products-interfaces";
+import type { AuthUser, AddProductDTO, UpdateProductRequestDTO } from "./products-interfaces";
+import { bodySchemaAdd, bodySchemaUpdate, bodySchemaDelete } from "./products-interfaces";
 import { ProductsService } from "./products-service";
 
 export class ProductsController {
   constructor(private service: ProductsService) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply) {
-    const data: ProductDTO = bodySchema.parse(request.body);
+  async add(request: FastifyRequest, reply: FastifyReply) {
+    const data: AddProductDTO = bodySchemaAdd.parse(request.body);
 
     const user: AuthUser = {role: request.user.role, company_cnpj: request.user.company_cnpj};
 
@@ -20,5 +20,25 @@ export class ProductsController {
     const products = await this.service.listAll();
 
     return reply.code(200).send(products);
+  }
+
+  async update(request: FastifyRequest, reply: FastifyReply) {
+    const data: UpdateProductRequestDTO = bodySchemaUpdate.parse(request.body);
+
+    const user: AuthUser = {role: request.user.role, company_cnpj: request.user.company_cnpj};
+
+    const productUpdated = await this.service.update(data, user);
+
+    return reply.code(200).send(productUpdated);
+  }
+
+  async delete(request: FastifyRequest, reply: FastifyReply) {
+    const {id} = bodySchemaDelete.parse(request.body);
+
+    const user: AuthUser = {role: request.user.role, company_cnpj: request.user.company_cnpj};
+
+    const productUpdated = await this.service.delete(id, user);
+
+    return reply.code(200).send(productUpdated);
   }
 }
