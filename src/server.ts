@@ -6,6 +6,7 @@ import { registerRoute } from "./routes/register-route.js";
 import { ZodError } from "zod";
 import { AppError } from "./utils/app-error.js";
 import { companyRoute } from "./routes/companies-route";
+import { productsRoute } from "./routes/products-route";
 
 if (!process.env.PORT) {
   throw new Error("PORT não definido");
@@ -19,6 +20,7 @@ app.register(fastifyJwt, {secret: process.env.JWT_SECRET!});
 app.register(loginRoute);
 app.register(registerRoute);
 app.register(companyRoute);
+app.register(productsRoute);
 
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {

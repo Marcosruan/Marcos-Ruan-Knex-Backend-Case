@@ -3,7 +3,7 @@ import type { UserResponse } from "../../@types/responses";
 
 export const bodySchema = z.object({
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().max(255),
 });
 
 export type LoginDTO = z.infer<typeof bodySchema>;

@@ -2,9 +2,9 @@ import { z } from "zod";
 import type { UserResponse } from "../../@types/responses";
 
 export const bodySchema = z.object({
-  name: z.string(),
+  name: z.string().max(255),
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().max(255),
   role: z.enum(["CUSTOMER", "SALESPERSON", "ADMIN"]).optional(),
   company_cnpj: z.string().nullable().optional(),
 });
