@@ -10,11 +10,11 @@ export async function ordersRoute(app: FastifyInstance) {
   const service = new OrdersService(repository);
   const controller = new OrdersController(service);
 
-  // app.get("/orders", { onRequest: [verifyJWT] }, (req, res) =>
-  //   controller.list(res),
-  // );
-
   app.post("/orders", { onRequest: [verifyJWT] }, (req, res) =>
     controller.add(req, res),
+  );
+
+  app.patch("/orders/:id/status", { onRequest: [verifyJWT] }, (req, res) =>
+    controller.updateStatus(req, res),
   );
 }

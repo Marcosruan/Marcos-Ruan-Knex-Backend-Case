@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { OrdersService } from "./orders-service";
-import { bodySchemaAdd } from "./orders-interfaces";
+import { bodySchemaAdd, updateStatusParamsSchema, updateStatusSchema, type AuthUserOrder } from "./orders-interfaces";
 
 export class OrdersController {
     constructor(private service: OrdersService) {}
@@ -16,9 +16,15 @@ export class OrdersController {
 
     }
 
-    // async list(reply: FastifyReply){
-    //     const products = await this.service.listAll();
-    
-    //     return reply.code(200).send(products);
-    // }
+    async updateStatus(request: FastifyRequest, reply: FastifyReply) {
+        const { id } = updateStatusParamsSchema.parse(request.params);
+        
+        const { status } = updateStatusSchema.parse(request.body);
+
+        const user: AuthUserOrder = {...request.user, userId: request.user.sub};
+
+        const { updatedOrder } = await this.service.updateStatus({orderId: id, status}, user);
+
+        return reply.status(200).send({orderId: updatedOrder.id, newStatus: updatedOrder.status});
+    }
 }

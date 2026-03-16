@@ -2,11 +2,33 @@ import { db } from "../../db";
 import { orders, order_items } from "../../db/schema/orders-schema"; 
 import { products } from "../../db/schema/products-schema";
 import { inArray, eq } from "drizzle-orm";
-import type { CreateOrderInput } from "./orders-interfaces";
+import type { CreateOrderInput, UpdateOrderStatusInput } from "./orders-interfaces";
 import { AppError } from "../../utils/app-error";
+import { sql } from 'drizzle-orm';
 
 export class OrdersRepository {
     constructor(private orm: typeof db) {}
+
+    async findById(id: string) {
+      console.log(id)
+      const result = await this.orm
+        .select()
+        .from(orders)
+        .where(eq(orders.id, id));
+    
+      return result[0];
+    }
+
+    async updateStatus({ orderId, status }: UpdateOrderStatusInput) {
+      const result = await this.orm
+        .update(orders)
+        .set({ status })
+        .where(eq(orders.id, orderId))
+        .returning();
+
+      return result[0];
+    }
+
     async createOrder({ userId, items }: CreateOrderInput) {
 
       return await this.orm.transaction(async (tx) => {
