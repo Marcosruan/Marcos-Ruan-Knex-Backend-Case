@@ -4,7 +4,9 @@
   "description": "API para plataforma de Vendas.",
   "main": "src/server.js",
   "scripts": {
-    "dev": "tsx watch src/server.js"
+    "dev": "tsx watch src/server.js",
+    "migrate:prod": "drizzle-kit migrate",
+    "start": "npm run migrate:prod && node src/server.js"
   },
   "keywords": [],
   "author": "Marcos Ruan Vieira de Figueiredo",
