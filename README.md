@@ -112,7 +112,7 @@ Api de vendas para o processo seletivo da Knex jr.
 
 4. Acesse a aplicação
 
-    - Abra um cliente HTTP, como o insomnia, por exemplo, e acesse as rotas da api que estão descritas no campo das rotas lá em cima
+    - Abra um cliente HTTP, como o insomnia, por exemplo, e acesse os endpoints da api que estão descritas no campo das rotas lá em cima
 
     ```sh
     http://localhost:8080/rota desejada
