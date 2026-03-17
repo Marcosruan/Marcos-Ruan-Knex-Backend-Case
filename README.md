@@ -104,21 +104,13 @@ Api de vendas para o processo seletivo da Knex jr.
 
 3. Acesse a aplicação
 
-    - Na pasta do projeto, para iniciar o servidor, execute o seguinte comando no terminal:
-
-    ```sh
-    npm run dev
-    ```
-
-4. Acesse a aplicação
-
     - Abra um cliente HTTP, como o insomnia, por exemplo, e acesse as rotas da api que estão descritas no campo das rotas lá em cima
 
     ```sh
     http://localhost:8080/rota desejada
     ```
 
-3. Recomendação
+4. Recomendação
 
     - Para vizualizar as alterações no banco de dados facilmente, recomendo rodar o seguinte comando no terminal do projeto e acessar o link que é gerado:
 
