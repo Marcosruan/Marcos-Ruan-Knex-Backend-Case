@@ -35,6 +35,7 @@ export interface IProductRepository {
   productTypeExists(data: AddProductDTO): Promise<ProductResponse | undefined>;
   addProduct(data: AddProductDTO): Promise<ProductResponse>;
   getAllProducts(): Promise<ProductResponse[] | undefined>;
+  getProductsByCompany(cnpj: string): Promise<ProductResponse[]>;
   findById(id: string): Promise<ProductResponse | undefined>;
   updateProduct(id: string, data: UpdateProductDTO): Promise<ProductResponse | undefined>;
   deleteProduct(id: string): Promise<any>;
