@@ -88,12 +88,12 @@ Api de vendas para o processo seletivo da Knex jr.
 
 ## 🚀 Como executar
 
-1. Clone o repositório
+1. Clone o repositório ou faça o fork do projeto
     ```sh
     git https://github.com/Marcosruan/Marcos-Ruan-Knex-Backend-Case
     ```
 
-2. inicialize o Docker
+2. Inicialize o Docker
 
     - Certifique-se de abrir o programa do Docker
     - Na pasta do projeto (importante), abra o terminal e execute:
